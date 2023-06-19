@@ -1,0 +1,133 @@
+$cube-d: 15px;
+$cubes-d: 70px;
+$duration: 5s;
+$bg: #000116;
+
+body {
+    background-color: $bg;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    overflow: hidden;
+    & > div {
+        position: relative;
+        transform-style: preserve-3d;
+        width: ($cube-d * 2 + $cubes-d);
+        height: ($cube-d * 2 + $cubes-d);
+
+        .cubes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-style: preserve-3d;
+
+            &.one {
+                transform: translate(-50%, 0) rotateX(-45deg) rotateY(0deg);
+                animation: rotateY1 $duration linear 0s infinite forwards;
+                @keyframes rotateY1 {
+                    to {
+                        transform: translate(-50%, 0) rotateX(-45deg) rotateY(360deg);
+                    }
+                }
+            }
+            &.two {
+                transform: translate(50%, 0) rotateX(45deg) rotateY(0deg);
+                animation: rotateY2 $duration linear 0s infinite forwards;
+                @keyframes rotateY2 {
+                    to {
+                        transform: translate(50%, 0) rotateX(45deg) rotateY(360deg);
+                    }
+                }
+            }
+            &.three {
+                transform: translate(0, -50%) rotateX(90deg) rotateZ(-45deg) rotateY(0deg);
+                animation: rotateY3 $duration linear 0s infinite forwards;
+                @keyframes rotateY3 {
+                    to {
+                        transform: translate(0, -50%) rotateX(90deg) rotateZ(-45deg) rotateY(360deg);
+                    }
+                }
+            }
+            &.four {
+                transform: translate(0, 50%) rotateX(90deg) rotateZ(45deg) rotateY(0deg);
+                animation: rotateY4 $duration linear 0s infinite forwards;
+                @keyframes rotateY4 {
+                    to {
+                        transform: translate(0, 50%) rotateX(90deg) rotateZ(45deg) rotateY(360deg);
+                    }
+                }
+            }
+
+            .cubes-container {
+                position: relative;
+                transform-style: preserve-3d;
+                width: ($cube-d * 2 + $cubes-d);
+                height: ($cube-d * 2 + $cubes-d);
+
+                .cube {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform-style: preserve-3d;
+
+                    $cubes_num: 16;
+
+                    @for $i from 1 through ($cubes_num + 1) {
+                        &:nth-child(#{$i}) {
+                            transform: translate(-50%, -50%) rotateY(#{(360 / $cubes_num) * ($i + 1)}deg);
+                        }
+                    }
+                    & > div {
+                        transform-style: preserve-3d;
+                        & > div {
+                            transform-style: preserve-3d;
+                            width: $cube-d;
+                            height: $cube-d;
+                            position: relative;
+                            transform: translate(-$cubes-d) rotateY(90deg) rotateX(0deg);
+                        }
+                    }
+                }
+                span {
+                    display: block;
+                    width: $cube-d;
+                    height: $cube-d;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform-style: preserve-3d;
+                    &:nth-child(6) {
+                        background-color: #000116;
+                        transform-origin: left center;
+                        transform: translate3d((-$cube-d * 0.5), (-$cube-d * 0.5), (-$cube-d * 0.5)) rotateY(-90deg);
+                    }
+                    &:nth-child(5) {
+                        background-color: #000116;
+                        transform-origin: right center;
+                        transform: translate3d((-$cube-d * 0.5), (-$cube-d * 0.5), ($cube-d * 0.5)) rotateY(-90deg);
+                    }
+                    &:nth-child(4) {
+                        background-color: #f9f5f6;
+                        transform: translate3d((-$cube-d * 0.5), (-$cube-d * 0.5), ($cube-d * 0.5));
+                    }
+                    &:nth-child(3) {
+                        background-color: #f8e8ee;
+                        transform-origin: bottom center;
+                        transform: translate3d((-$cube-d * 0.5), (-$cube-d * 1.5), ($cube-d * 0.5)) rotateX(90deg);
+                    }
+                    &:nth-child(2) {
+                        background-color: #fdcedf;
+                        transform: translate3d((-$cube-d * 0.5), (-$cube-d * 0.5), (-$cube-d * 0.5));
+                    }
+                    &:nth-child(1) {
+                        background-color: #f2bed1;
+                        transform-origin: top center;
+                        transform: translate3d((-$cube-d * 0.5), ($cube-d * 0.5), ($cube-d * 0.5)) rotateX(-90deg);
+                    }
+                }
+            }
+        }
+    }
+}
